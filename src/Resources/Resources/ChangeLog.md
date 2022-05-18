@@ -19,6 +19,8 @@
 -->
 
 ## Upcoming Release
+
+## Version 6.0.0
 * Added cmdlet for Application federated identity credential
     - `Get-AzADAppFederatedIdentityCredential` 
     - `New-AzADAppFederatedIdentityCredential` 

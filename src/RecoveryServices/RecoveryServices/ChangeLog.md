@@ -18,6 +18,8 @@
         - Additional information about change #1
 -->
 ## Upcoming Release
+
+## Version 5.4.0
 * Added support for Multi-user authorization using Resource Guard for recovery sevrices vault.
 * Added support for cross subscription restore for recovery services vault.
 
