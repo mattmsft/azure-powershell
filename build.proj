@@ -30,6 +30,13 @@
   <Import Project="$(MSBuildThisFileDirectory)Repo.props" />
 
   <PropertyGroup>
+    <!-- XML -->
+    <GenerateXml Condition="'$(GenerateXml)' != 'true'">false</GenerateXml>
+    <GenerateDocumentationFile Condition="'$(GenerateXml)' != 'true'">false</GenerateDocumentationFile>
+    <GenerateDocumentationFile Condition="'$(GenerateXml)' == 'true'">true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <!-- General -->
     <Configuration Condition="'$(Configuration)' != 'Release'">Debug</Configuration>
     <Scope Condition="$(Scope) == ''">All</Scope>
@@ -152,6 +159,7 @@
   <!-- Build all flavors of the Cmdlets -->
   <Target Name="Build" DependsOnTargets="FilterBuild">
     <Message Importance="high" Text="Building Cmdlets..." />
+    <Message Importance="high" Text="$(GenerateXml) $(GenerateDocumentationFile)" />
 
     <MakeDir Directories="$(RepoArtifacts)" />
 
@@ -194,7 +202,7 @@
     <Exec Command="dotnet $(BuildAction) $(RepoArtifacts)Azure.PowerShell.sln -c $(Configuration)" />
 
     <!-- Build version controller -->
-    <Exec Command="dotnet build $(RepoTools)VersionController/VersionController.Netcore.csproj -c $(Configuration)" />
+    <Exec Command="dotnet build $(RepoTools)VersionController/VersionController.Netcore.csproj -c $(Configuration) -p:GenerateDocumentationFile=$(GenerateDocumentationFile)" />
 
     <!-- Delete powershell runtime files -->
     <PropertyGroup>
